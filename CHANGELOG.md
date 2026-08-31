@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-09-01
+
 ### Fixed
 
 - Chat messages now appear immediately while a response is running instead of only after reopening the session
