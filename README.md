@@ -90,7 +90,7 @@ Builds the static site and uploads it to `sitegeist.ai`. Requires SSH access to 
 ./release.sh major   # 1.0.0 -> 2.0.0
 ```
 
-Bumps the version in `static/manifest.chrome.json`, commits, tags, and pushes. GitHub Actions builds the extension and creates a release at [github.com/badlogic/sitegeist/releases](https://github.com/badlogic/sitegeist/releases).
+Bumps the version in `static/manifest.chrome.json`, commits, tags, and pushes. GitHub Actions builds the extension and creates a release at [github.com/limitcodes/sitegeist/releases](https://github.com/limitcodes/sitegeist/releases).
 
 ## License
 

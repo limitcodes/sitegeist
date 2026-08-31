@@ -9,6 +9,7 @@
 ### Changed
 
 - Added OpenCode Zen and OpenCode Go to API key settings
+- Updated release builds and download links for the fork's self-contained dependencies and GitHub repository
 - Removed the original deployment's remote update check from self-built extensions
 - Migrated the Pi runtime and AI dependencies to the current `@earendil-works` packages
 - Vendored the retired `pi-web-ui` package and updated it for the current Pi APIs and model catalog
