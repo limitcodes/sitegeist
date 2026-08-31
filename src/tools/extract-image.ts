@@ -1,9 +1,16 @@
-import type { AgentTool, AgentToolResult } from "@mariozechner/pi-agent-core";
-import type { ImageContent, TextContent, ToolResultMessage } from "@mariozechner/pi-ai";
-import { registerToolRenderer, renderHeader, type ToolRenderer, type ToolRenderResult } from "@mariozechner/pi-web-ui";
-import { type Static, Type } from "@sinclair/typebox";
+import type { AgentTool, AgentToolResult } from "@earendil-works/pi-agent-core";
+import type { ImageContent, TextContent, ToolResultMessage } from "@earendil-works/pi-ai";
+import { type Static, Type } from "@earendil-works/pi-ai";
+import {
+	registerToolRenderer,
+	renderHeader,
+	type ToolRenderer,
+	type ToolRenderResult,
+} from "@earendil-works/pi-web-ui";
+
 import { html } from "lit";
 import { Image as ImageIcon } from "lucide";
+import { Value } from "typebox/value";
 
 const EXTRACT_IMAGE_DESCRIPTION = `Extract images from the current page. Returns image data that you can see and analyze.
 
@@ -152,9 +159,10 @@ export class ExtractImageTool implements AgentTool<typeof extractImageSchema, Ex
 
 	async execute(
 		_toolCallId: string,
-		args: ExtractImageParams,
+		params: unknown,
 		_signal?: AbortSignal,
 	): Promise<AgentToolResult<ExtractImageDetails>> {
+		const args = Value.Parse(extractImageSchema, params);
 		const maxWidth = args.maxWidth || 800;
 		const content: (TextContent | ImageContent)[] = [];
 		const details: ExtractImageDetails = { mode: args.mode, selector: args.selector };

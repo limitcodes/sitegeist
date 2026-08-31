@@ -1,8 +1,8 @@
+import type { AgentTool } from "@earendil-works/pi-agent-core";
+import type { ToolResultMessage } from "@earendil-works/pi-ai";
+import { type Static, Type } from "@earendil-works/pi-ai";
+import { registerToolRenderer, type ToolRenderer, type ToolRenderResult } from "@earendil-works/pi-web-ui";
 import { i18n, icon } from "@mariozechner/mini-lit";
-import type { AgentTool } from "@mariozechner/pi-agent-core";
-import type { ToolResultMessage } from "@mariozechner/pi-ai";
-import { registerToolRenderer, type ToolRenderer, type ToolRenderResult } from "@mariozechner/pi-web-ui";
-import { type Static, Type } from "@sinclair/typebox";
 import { html } from "lit";
 import { Loader2 } from "lucide";
 import { SkillPill } from "../components/SkillPill.js";
@@ -12,6 +12,7 @@ import { getSitegeistStorage } from "../storage/app-storage.js";
 import type { Skill } from "../storage/stores/skills-store.js";
 import { formatSkills } from "../utils/format-skills.js";
 import "../utils/i18n-extension.js";
+import { Value } from "typebox/value";
 
 // Track tool-initiated navigations to filter out duplicate navigation messages
 let isNavigating = false;
@@ -71,9 +72,10 @@ export class NavigateTool implements AgentTool<typeof navigateSchema, NavigateRe
 
 	async execute(
 		_toolCallId: string,
-		args: NavigateParams,
+		params: unknown,
 		signal?: AbortSignal,
 	): Promise<{ content: Array<{ type: "text"; text: string }>; details: NavigateResult }> {
+		const args = Value.Parse(navigateSchema, params);
 		if (signal?.aborted) {
 			throw new Error("Navigation aborted");
 		}

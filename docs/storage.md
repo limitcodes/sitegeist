@@ -2,7 +2,7 @@
 
 ## Overview
 
-Sitegeist uses a unified IndexedDB storage system with multiple object stores for different data types. The base storage infrastructure is defined in `@mariozechner/pi-web-ui` and extended in Sitegeist with additional stores for skills.
+Sitegeist uses a unified IndexedDB storage system with multiple object stores for different data types. The base storage infrastructure is defined in `@earendil-works/pi-web-ui` and extended in Sitegeist with additional stores for skills.
 
 ## Current Implementation
 

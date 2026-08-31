@@ -7,19 +7,20 @@
 	"main": "dist/background.js",
 	"scripts": {
 		"clean": "rm -rf dist-chrome",
+		"build:web-ui": "npm run --prefix vendor/pi-web-ui build",
 		"build:chrome": "node ./scripts/build.mjs && tailwindcss -i ./src/app.css -o ./dist-chrome/app.css --minify",
-		"build": "npm run build:chrome",
+		"build": "npm run build:web-ui && npm run build:chrome",
 		"dev": "concurrently -n \"build,css,server\" -c \"blue,green,yellow\" \"node ./scripts/build.mjs --watch\" \"tailwindcss -i ./src/app.css -o ./dist-chrome/app.css --watch\" \"node ./scripts/dev-server.mjs\"",
 		"typecheck": "tsc --noEmit",
-		"check": "biome check --write . && tsc --noEmit && cd site && npm run check",
-		"prepare": "husky"
+		"check": "biome check --write . && npm run --prefix vendor/pi-web-ui check && tsc --noEmit && cd site && npm run check",
+		"prepare": "npm run build:web-ui && husky"
 	},
 	"dependencies": {
+		"@earendil-works/pi-agent-core": "^0.84.4",
+		"@earendil-works/pi-ai": "^0.84.4",
+		"@earendil-works/pi-web-ui": "file:vendor/pi-web-ui",
 		"@mariozechner/jailjs": "^0.1.0",
-		"@mariozechner/mini-lit": "file:../mini-lit",
-		"@mariozechner/pi-agent-core": "file:../pi-mono/packages/agent",
-		"@mariozechner/pi-ai": "file:../pi-mono/packages/ai",
-		"@mariozechner/pi-web-ui": "file:../pi-mono/packages/web-ui",
+		"@mariozechner/mini-lit": "^0.2.1",
 		"@sinclair/typebox": "^0.34.41",
 		"chart.js": "^4.5.1",
 		"docx-preview": "^0.3.7",

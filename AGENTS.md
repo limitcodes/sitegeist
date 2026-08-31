@@ -15,9 +15,10 @@ If the user did not give you a concrete task, read README.md first.
 - Always ask before removing functionality or code that appears intentional
 
 ## Dependencies
-- `@mariozechner/mini-lit`, `@mariozechner/pi-ai`, `@mariozechner/pi-web-ui`, `@mariozechner/pi-agent-core` are linked via `file:` to sibling repos `../mini-lit` and `../pi-mono`
-- Changes to those packages require rebuilding them (the dev watcher handles this)
-- If you need to modify upstream code, edit it in `../pi-mono` or `../mini-lit` directly and rebuild
+- `@mariozechner/mini-lit`, `@earendil-works/pi-ai`, and `@earendil-works/pi-agent-core` are installed from npm
+- `@earendil-works/pi-web-ui` was retired upstream and is maintained in `vendor/pi-web-ui`
+- Build the vendored package after changing it with `npm run build:web-ui`
+- Do not assume sibling clones of `mini-lit` or the Pi monorepo exist
 
 ## Changelog
 Location: `CHANGELOG.md`

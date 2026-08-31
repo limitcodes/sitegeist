@@ -21,7 +21,7 @@ export type AppMessage = BaseMessage | CustomMessages[keyof CustomMessages];
 
 **Extending**: Add custom types via declaration merging
 ```typescript
-declare module "@mariozechner/pi-web-ui" {
+declare module "@earendil-works/pi-web-ui" {
   interface CustomMessages {
     welcome: WelcomeMessage;
     navigation: NavigationMessage;
@@ -54,7 +54,7 @@ export interface NavigationMessage {
   favicon?: string;
 }
 
-declare module "@mariozechner/pi-web-ui" {
+declare module "@earendil-works/pi-web-ui" {
   interface CustomMessages {
     navigation: NavigationMessage;
   }
@@ -120,7 +120,7 @@ function createNavigationRenderer(agent: Agent): MessageRenderer<NavigationMessa
 ### 4. Register Renderer
 
 ```typescript
-import { registerMessageRenderer } from "@mariozechner/pi-web-ui";
+import { registerMessageRenderer } from "@earendil-works/pi-web-ui";
 
 registerMessageRenderer("navigation", navigationRenderer);
 ```

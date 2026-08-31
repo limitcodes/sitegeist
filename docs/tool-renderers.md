@@ -53,7 +53,7 @@ Renderers should handle all execution states:
 ### Registration
 
 ```typescript
-import { registerToolRenderer } from "@mariozechner/pi-web-ui";
+import { registerToolRenderer } from "@earendil-works/pi-web-ui";
 
 registerToolRenderer("tool_name", toolRenderer);
 ```

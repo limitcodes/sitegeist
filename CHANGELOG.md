@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Chat messages now appear immediately while a response is running instead of only after reopening the session
+
+### Changed
+
+- Migrated the Pi runtime and AI dependencies to the current `@earendil-works` packages
+- Vendored the retired `pi-web-ui` package and updated it for the current Pi APIs and model catalog
+- Replaced local `mini-lit` and Pi monorepo links with self-contained dependencies
+
 ## [1.0.0] - 2026-03-15
 
 ### Added

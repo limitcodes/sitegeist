@@ -16,32 +16,21 @@ Requires Chrome 141+ or Edge equivalent.
 
 ## Development
 
-Clone this repo plus its sibling dependencies into the same parent directory:
-
-```
-parent/
-  mini-lit/          # https://github.com/badlogic/mini-lit
-  pi-mono/           # https://github.com/badlogic/pi-mono
-  sitegeist/         # this repo
-```
-
-Install dependencies in each repo:
+Clone this repo and install its dependencies:
 
 ```bash
-(cd ../mini-lit && npm install)
-(cd ../pi-mono && npm install)
 npm install
 ```
 
+Sitegeist maintains its retired upstream web UI dependency in `vendor/pi-web-ui`. Installation builds it automatically.
+
 `npm install` sets up the Husky pre-commit hook automatically.
 
-Start all dev watchers (mini-lit, pi-mono, sitegeist extension, marketing site):
+Start the extension and marketing site development watchers:
 
 ```bash
 ./dev.sh
 ```
-
-Changes in `../mini-lit` or `../pi-mono` are rebuilt automatically and picked up by the sitegeist watcher.
 
 To run only the extension watcher without dependencies or the marketing site:
 

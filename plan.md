@@ -361,7 +361,7 @@ Call on app startup before any model selection happens.
 ### 7. Sitegeist Integration
 
 **Update: `sitegeist/src/sidepanel.ts`**
-- Import: `import { ProvidersModelsTab } from "@mariozechner/pi-web-ui"`
+- Import: `import { ProvidersModelsTab } from "@earendil-works/pi-web-ui"`
 - Update SettingsDialog to use new tab name
 
 **Update: `sitegeist/src/storage/app-storage.ts`**
