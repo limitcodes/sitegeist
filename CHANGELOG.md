@@ -8,6 +8,8 @@
 
 ### Changed
 
+- Added OpenCode Zen and OpenCode Go to API key settings
+- Removed the original deployment's remote update check from self-built extensions
 - Migrated the Pi runtime and AI dependencies to the current `@earendil-works` packages
 - Vendored the retired `pi-web-ui` package and updated it for the current Pi APIs and model catalog
 - Replaced local `mini-lit` and Pi monorepo links with self-contained dependencies
