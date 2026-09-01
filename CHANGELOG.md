@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-09-01
+
 ### Added
 
 - Added the ability for the agent to close browser tabs through the navigate tool
