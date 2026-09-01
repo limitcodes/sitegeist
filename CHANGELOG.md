@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added the ability for the agent to close browser tabs through the navigate tool
+- Documented the document and image extraction tools in the agent system prompt
+- Added a download tool that saves URL files under the browser Downloads folder
+
 ## [1.0.1] - 2026-09-01
 
 ### Fixed

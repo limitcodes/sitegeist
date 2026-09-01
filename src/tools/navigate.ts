@@ -38,6 +38,7 @@ const navigateSchema = Type.Object({
 	newTab: Type.Optional(Type.Boolean({ description: "Set to true to open URL in a new tab instead of current tab" })),
 	listTabs: Type.Optional(Type.Boolean({ description: "Set to true to list all open tabs" })),
 	switchToTab: Type.Optional(Type.Number({ description: "Tab ID to switch to (get IDs from listTabs)" })),
+	closeTab: Type.Optional(Type.Number({ description: "Tab ID to close (get IDs from listTabs)" })),
 });
 
 export type NavigateParams = Static<typeof navigateSchema>;
@@ -58,6 +59,8 @@ export interface NavigateResult {
 	skills?: Array<{ name: string; shortDescription: string; fullDetails?: Skill }>;
 	tabs?: TabInfo[];
 	switchedToTab?: number;
+	closedTab?: number;
+	closedTabTitle?: string;
 }
 
 // ============================================================================
@@ -93,6 +96,11 @@ export class NavigateTool implements AgentTool<typeof navigateSchema, NavigateRe
 			} finally {
 				markNavigationEnd();
 			}
+		}
+
+		// Handle close tab action
+		if ("closeTab" in args && args.closeTab !== undefined) {
+			return this.closeTab(args.closeTab);
 		}
 
 		// Get active tab for navigation actions
@@ -289,6 +297,23 @@ export class NavigateTool implements AgentTool<typeof navigateSchema, NavigateRe
 		return { content: [{ type: "text", text: output }], details };
 	}
 
+	private async closeTab(
+		tabId: number,
+	): Promise<{ content: Array<{ type: "text"; text: string }>; details: NavigateResult }> {
+		const tabs = await chrome.tabs.query({});
+		const tab = tabs.find((candidate: chrome.tabs.Tab) => candidate.id === tabId);
+		if (!tab) {
+			throw new Error(`Tab ${tabId} not found`);
+		}
+
+		const title = tab.title || "Untitled";
+		await chrome.tabs.remove(tabId);
+		return {
+			content: [{ type: "text", text: `Closed tab ${tabId}: ${title}` }],
+			details: { closedTab: tabId, closedTabTitle: title },
+		};
+	}
+
 	private async switchToTab(
 		tabId: number,
 	): Promise<{ content: Array<{ type: "text"; text: string }>; details: NavigateResult }> {
@@ -400,7 +425,16 @@ export const navigateRenderer: ToolRenderer<NavigateParams, NavigateResult> = {
 
 		// Complete state (with result)
 		if (result && !result.isError && result.details) {
-			const { finalUrl, title, favicon, skills, tabs } = result.details;
+			const { finalUrl, title, favicon, skills, tabs, closedTab, closedTabTitle } = result.details;
+
+			if (closedTab !== undefined) {
+				return {
+					content: html`<div class="text-sm text-muted-foreground">
+						Closed tab ${closedTab}: ${closedTabTitle || "Untitled"}
+					</div>`,
+					isCustom: true,
+				};
+			}
 
 			// Handle tab listing
 			if (tabs) {
